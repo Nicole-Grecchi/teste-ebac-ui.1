@@ -1,0 +1,20 @@
+[
+    {
+        "nomeProdutos": "Augusta Pullover Jacket",
+         "tamanho": "S",
+         "cor": "Blue",
+         "quantidade": 7
+    },
+    {
+        "nomeProdutos": "Helena Hooded Fleece",
+         "tamanho": "S",
+         "cor": "Gray",
+         "quantidade": 4
+    },
+    {
+        "nomeProdutos": "Arcadio Gym Short",
+         "tamanho": "36",
+         "cor": "Black",
+         "quantidade": 6
+    }
+]
