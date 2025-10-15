@@ -7,7 +7,7 @@ class ProdutosPage{
 
   buscarProdutos(nomeProduto){
    
-   cy.get('[name="color"]').eq(1).click().type(nomeProduto)
+   cy.get('[name="s"]').eq(1).click().type(nomeProduto)
    cy.get('.button-search').eq(1).click()
   }
 
