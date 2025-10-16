@@ -4,6 +4,8 @@ import produtosPage from "../../support/page-objects/produtos.page";
 
 describe('funcionalidade: produtos', () => {
 
+  
+
     beforeEach(() => {
        produtosPage.visitarUrl()
     });

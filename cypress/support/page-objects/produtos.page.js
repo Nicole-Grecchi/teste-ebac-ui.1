@@ -1,8 +1,10 @@
 class ProdutosPage{
 
+
    visitarUrl() {
-     cy.visit("produtos")
-   }
+  cy.visit("http://lojaebac.ebaconline.art.br/");
+}
+
     
 
   buscarProdutos(nomeProduto){
@@ -11,12 +13,14 @@ class ProdutosPage{
    cy.get('.button-search').eq(1) 
   }
 
-   buscarProdutosLista(nomeProduto) {
-  cy.get('.products .product')
-    .should('exist') 
-    .contains('.woocommerce-loop-product__title', nomeProduto, { timeout: 10000 })
-    .click();
-}
+   
+  buscarProdutosLista(nomeProduto) {
+    cy.get('.products', { timeout: 10000 }).should('exist');
+    cy.contains('.woocommerce-loop-product__title', nomeProduto)
+      .should('be.visible')
+      .click({ force: true });
+  }
+
 
 
    visitarProdutos(nomeProduto) {
