@@ -2,28 +2,31 @@ class ProdutosPage{
 
 
    visitarUrl() {
-  cy.visit("http://lojaebac.ebaconline.art.br/");
+  cy.visit("http://lojaebac.ebaconline.art.br/produtos/");
 }
 
-    
 
-  buscarProdutos(nomeProduto){
-   
-   cy.get('[name="s"]').eq(1).click().type(nomeProduto)
-   cy.get('.button-search').eq(1) 
-  }
-
-   
-  buscarProdutosLista(nomeProduto) {
-    cy.get('.products', { timeout: 10000 }).should('exist');
-    cy.contains('.woocommerce-loop-product__title', nomeProduto)
+ buscarProduto(nomeProduto) {
+    cy.get('body').should('be.visible');
+    cy.get('input[type="search"][name="s"]', { timeout: 10000 })
       .should('be.visible')
-      .click({ force: true });
+      .clear()
+      .type(nomeProduto);
+    cy.get('button.button-search').click();
+    cy.get('.woocommerce-loop-product__title', { timeout: 10000 })
+      .contains(nomeProduto)
+      .should('be.visible')
+      .click();
   }
 
 
 
-   visitarProdutos(nomeProduto) {
+
+    buscarProdutosLista(nomeProduto) { 
+cy.get('.products .name').contains(nomeProduto) .click() 
+}
+
+   visitarProduto(nomeProduto) {
       // cy.visit(`produtos/${nomeProduto}`)
        const urlFormatada =  nomeProduto.replace(/ /g, '-' )
        cy.visit(`produtos/${urlFormatada}`)
@@ -31,7 +34,7 @@ class ProdutosPage{
 
    }
 
-   addProdutosCarrinho(tamanho, cor, quantidade) {
+   addProdutoCarrinho(tamanho, cor, quantidade) {
       cy.get('.button-variable-item-' + tamanho ).click()
       cy.get(`.button-variable-item-${cor}`).click()
       cy.get('.input-text').clear().type(quantidade)

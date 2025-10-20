@@ -2,11 +2,8 @@
 
 import produtosPage from "../../support/page-objects/produtos.page";
 
-describe('funcionalidade: produtos', () => {
-
-  
-
-    beforeEach(() => {
+describe('Buscar produto na loja Ebac', () => {
+     beforeEach(() => {
        produtosPage.visitarUrl()
     });
     it('deve selecionar um produto da lista', () => {
@@ -35,19 +32,17 @@ describe('funcionalidade: produtos', () => {
     });
 
    
-    it.only('deve adicionar produto ao carrinho buscando da massa de dados ', () => {
+   it.only('deve adicionar produto ao carrinho buscando da massa de dados ', () => {
       cy.fixture('produtos').then(dados => {
-      produtosPage.buscarProdutos(dados[1].nomeProduto)
-      produtosPage.buscarProdutosLista(dados[1].nomeProduto)
-      produtosPage.addProdutosCarrinho(
-        dados[1].tamanho,
-        dados[1].cor,
-        dados[1].tamanho)
-      cy.get('.woocommerce-message').should("contain" , dados[1].nomeProduto  )
+      produtosPage.buscarProduto(dados[2].nomeProduto)
+      produtosPage.buscarProdutosLista(dados[2].nomeProduto)
+      produtosPage.addProdutoCarrinho(
+        dados[2].tamanho,
+        dados[2].cor,
+        dados[2].quantidade)
+      cy.get('.woocommerce-message').should("contain" , dados[2].nomeProduto  )
 
       })
+  })
+  });
       
-        
-    });
-
-});
