@@ -2,8 +2,7 @@ class ProdutosPage {
 
   visitarUrl() {
     cy.visit('/')
-     cy.get('input[placeholder="Enter your search ..."]', { timeout: 15000 })
-     .should('be.visible')
+     cy.get('[name="s"]').eq(1).type(nomeProduto)
   }
 
   buscarProduto(nomeProduto) {
@@ -14,11 +13,9 @@ class ProdutosPage {
     cy.get('button[value="Search"]').click()
   }
 
-  buscarProdutosLista(nomeProduto) {
-    cy.get('.products .woocommerce-loop-product__title', { timeout: 10000 })
-      .contains(nomeProduto)
-      .click()
-  }
+  buscarProdutosLista(nomeProduto) { 
+cy.get('.products .name').contains(nomeProduto) .click() 
+}
 
   visitarProduto(nomeProduto) {
     const urlFormatada = nomeProduto.replace(/ /g, '-')
