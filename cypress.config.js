@@ -1,13 +1,11 @@
-const { defineConfig } = require("cypress");
+const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
   e2e: {
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-     },
-
-     baseUrl: "http://lojaebac.ebaconline.art.br/",
-  
-    
+    baseUrl: 'http://lojaebac.ebaconline.art.br/',
+    defaultCommandTimeout: 15000,
+    viewportWidth: 1000,
+    viewportHeight: 660
   }
-});
+})
+
