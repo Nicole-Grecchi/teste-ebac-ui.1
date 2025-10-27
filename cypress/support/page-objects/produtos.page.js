@@ -1,16 +1,15 @@
 class ProdutosPage {
 
   visitarUrl() {
-    cy.visit('/')
-     cy.get('[name="s"]').eq(1).type(nomeProduto)
+    cy.visit('produtos')
+     
   }
 
-  buscarProduto(nomeProduto) {
-    cy.get('input[placeholder="Enter your search ..."]')
-      .clear()
-      .type(nomeProduto)
+  
 
-    cy.get('button[value="Search"]').click()
+  buscarProduto(nomeProduto) {
+  cy.get('[name="s"]').eq(1).type(nomeProduto)
+    
   }
 
   buscarProdutosLista(nomeProduto) { 
