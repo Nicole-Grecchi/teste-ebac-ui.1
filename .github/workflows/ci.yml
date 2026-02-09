@@ -1,0 +1,59 @@
+name: CI - Testes UI EBAC
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      NODE_ENV: test
+      BASE_URL: https://lojaebac.ebaconline.art.br/
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Executar testes Cypress
+        run: npx cypress run --reporter mochawesome
+
+      - name: Gerar merge do Mochawesome
+        run: npx mochawesome-merge cypress/reports/*.json > mochawesome.json
+
+      - name: Gerar relatório HTML
+        run: npx marge mochawesome.json -f report -o mochawesome-report
+
+      - name: Upload do relatório
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-report
+          path: mochawesome-report
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar artefato do relatório
+        uses: actions/download-artifact@v4
+        with:
+          name: mochawesome-report
+          path: mochawesome-report
+
+      - name: Publicar no GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./mochawesome-report
